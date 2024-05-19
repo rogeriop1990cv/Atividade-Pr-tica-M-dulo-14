@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-IntegradoApplication<integrado>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.projeto.integrado.IntegradoApplication",
+      "projectName": "integrado",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

@@ -40,6 +40,14 @@ public class ProjetoController {
 		else 
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
 	}
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<Projeto> getByNome(@PathVariable String nome) {
+		Projeto projeto = projetoService.getByNome(nome);
+		if(projeto != null)
+			return new ResponseEntity<>(projeto, HttpStatus.OK); 
+		else 
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
+	}
 	
 	@PostMapping
 	public ResponseEntity<Projeto> saveProjeto(@RequestBody Projeto projeto) {

@@ -6,4 +6,5 @@ import com.projeto.integrado.entity.Projeto;
 
 public interface ProjetoRepository extends JpaRepository<Projeto, Integer> {
 	Optional<Projeto> findByProjetoDescricao(String projetoDescricao);
+	Optional<Projeto> findByProjetoNome(String projetoNome);
 }

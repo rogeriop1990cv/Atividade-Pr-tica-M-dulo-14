@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+### Implementação de Métodos de Consulta
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### ProjetoRepository, ProjetoService e ProjetoController
 
-## Available Scripts
+##### ProjetoRepository.java
 
-In the project directory, you can run:
+```java
+Optional<Projeto> findByProjetoNome(String projetoNome);
+```
 
-### `npm start`
+##### ProjetoService.java
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```java
+public Projeto getByNome(String nome) {
+    return projetoRepository.findByProjetoNome(nome).orElse(null);
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##### ProjetoController.java
 
-### `npm test`
+```java
+@GetMapping("/nome/{nome}")
+public ResponseEntity<Projeto> getByNome(@PathVariable String nome) {
+    Projeto projeto = projetoService.getByNome(nome);
+    if (projeto != null) {
+        return new ResponseEntity<>(projeto, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### RecursoRepository, RecursoService e RecursoController
 
-### `npm run build`
+##### RecursoRepository.java
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```java
+Optional<Recurso> findByRecursoFuncao(String recursoFuncao);
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##### RecursoService.java
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```java
+public Recurso findByRecursoNome(String id) {
+    return recursoRepository.findByRecursoNome(id).orElse(null);
+}
 
-### `npm run eject`
+public Recurso findByRecursoFuncao(String id) {
+    return recursoRepository.findByRecursoFuncao(id).orElse(null);
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+##### RecursoController.java
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```java
+@GetMapping("/nome/{nome}")
+public ResponseEntity<Recurso> findByRecursoNome(@PathVariable String nome) {
+    Recurso recurso = recursoService.findByRecursoNome(nome);
+    if (recurso != null) {
+        return new ResponseEntity<>(recurso, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+@GetMapping("/funcao/{funcao}")
+public ResponseEntity<Recurso> findByRecursoFuncao(@PathVariable String funcao) {
+    Recurso recurso = recursoService.findByRecursoFuncao(funcao);
+    if (recurso != null) {
+        return new ResponseEntity<>(recurso, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### StatusTarefaRepository, StatusTarefaService e StatusTarefaController
 
-## Learn More
+##### StatusTarefaRepository.java
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```java
+Optional<StatusTarefa> findByStatusDescricao(String statusDescricao);
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### StatusTarefaService.java
 
-### Code Splitting
+```java
+public StatusTarefa findByStatusDescricao(String statusDescricao) {
+    return statusTarefaRepository.findByStatusDescricao(statusDescricao).orElse(null);
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##### StatusTarefaController.java
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```java
+@GetMapping("/descricao/{statusDescricao}")
+public ResponseEntity<StatusTarefa> findByStatusDescricao(@PathVariable String statusDescricao) {
+    StatusTarefa statusTarefa = statusTarefaService.findByStatusDescricao(statusDescricao);
+    if (statusTarefa != null) {
+        return new ResponseEntity<>(statusTarefa, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+}
+```

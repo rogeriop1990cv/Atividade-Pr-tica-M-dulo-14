@@ -19,6 +19,10 @@ public class StatusTarefaService {
 		return statusTarefaRepository.findById(id).orElse(null) ;
 	}
 	
+	public StatusTarefa findByStatusDescricao(String statusDeString) {
+		return statusTarefaRepository.findByStatusDescricao(statusDeString).orElse(null) ;
+	}
+	
 	public StatusTarefa saveStatusTarefa(StatusTarefa statusTarefa) {
 		return statusTarefaRepository.save(statusTarefa);
 	}

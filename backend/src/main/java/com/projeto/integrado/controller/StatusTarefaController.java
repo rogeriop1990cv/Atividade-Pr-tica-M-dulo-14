@@ -41,6 +41,15 @@ public class StatusTarefaController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
 	}
 	
+	@GetMapping("/descricao/{statusDescricao}")
+	public ResponseEntity<StatusTarefa> findByStatusDescricao(@PathVariable String statusDescricao) {
+		StatusTarefa statusTarefa = statusTarefaService.findByStatusDescricao(statusDescricao);
+		if(statusTarefa != null)
+			return new ResponseEntity<>(statusTarefa, HttpStatus.OK); 
+		else 
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
+	}
+	
 	@PostMapping
 	public ResponseEntity<StatusTarefa> saveStatusTarefa(@RequestBody StatusTarefa statusTarefa) {
 		return new ResponseEntity<>(statusTarefaService.saveStatusTarefa(statusTarefa), HttpStatus.CREATED);

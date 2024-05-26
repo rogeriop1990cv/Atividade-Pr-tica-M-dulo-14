@@ -6,4 +6,5 @@ import com.projeto.integrado.entity.Recurso;
 
 public interface RecursoRepository extends JpaRepository<Recurso, Integer> {
 	Optional<Recurso> findByRecursoNome(String recursoNome);
+	Optional<Recurso> findByRecursoFuncao(String recursoFuncao);
 }

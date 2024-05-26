@@ -19,6 +19,14 @@ public class RecursoService {
 		return recursoRepository.findById(id).orElse(null) ;
 	}
 	
+	public Recurso findByRecursoNome(String id) {
+		return recursoRepository.findByRecursoNome(id).orElse(null) ;
+	}
+	
+	public Recurso findByRecursoFuncao(String id) {
+		return recursoRepository.findByRecursoFuncao(id).orElse(null) ;
+	}
+	
 	public Recurso saveRecurso(Recurso recurso) {
 		return recursoRepository.save(recurso);
 	}
